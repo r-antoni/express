@@ -7,7 +7,7 @@ const create = async (req, res) => {
 
     if (!user_id || !title || !body) {
       return res.status(400).send({
-        message: `some field must be filled, cannot be empty`,
+        message: `Some field must be filled, cannot be empty`,
       });
     }
 
@@ -18,12 +18,12 @@ const create = async (req, res) => {
     });
 
     return res.status(201).send({
-      message: "post created",
+      message: "Post created",
     });
   } catch (error) {
     console.log(error);
     return res.send({
-      message: "error occured",
+      message: "Error occured",
       data: error,
     });
   }
@@ -31,16 +31,15 @@ const create = async (req, res) => {
 
 const read = async (req, res) => {
   try {
-    const allPosts = await postNew.findAll();
+    const Posts = await postNew.findAll();
 
     res.status(200).send({
-      message: "data post retrieved",
-      status: "ok",
-      data: allPosts,
+      message: "Post data retrieved",
+      data: Posts,
     });
   } catch (error) {
     return res.send({
-      message: "error occured",
+      message: "Error occured",
       data: error,
     });
   }
@@ -53,7 +52,7 @@ const update = async (req, res) => {
 
     if (!getPost) {
       return res.status(404).send({
-        message: `post not found`,
+        message: `Post not found`,
       });
     }
     const {title, body} = req.body;
@@ -66,11 +65,11 @@ const update = async (req, res) => {
     );
 
     res.status(201).send({
-      message: "post updated",
+      message: "Post updated",
     });
   } catch (error) {
     return res.send({
-      message: "error occured",
+      message: "Error occured",
       data: error.message,
     });
   }
@@ -83,17 +82,17 @@ const deletePost = async (req, res) => {
 
     if (!getPost) {
       return res.status(404).send({
-        message: `post not found`,
+        message: `Post not found`,
       });
     }
     const deletedPost = await postNew.destroy({where: {id: id}});
 
     res.status(200).send({
-      message: "post deleted",
+      message: "Post deleted",
     });
   } catch (error) {
     return res.send({
-      message: "error occured",
+      message: "Error occured",
       data: error.message,
     });
   }
