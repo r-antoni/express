@@ -48,6 +48,7 @@ const read = async (req, res) => {
 const update = async (req, res) => {
   try {
     const {id} = req.params;
+    const {title, body} = req.body;
     const getPost = await postNew.findOne({where: {id: id}});
 
     if (!getPost) {
@@ -55,7 +56,6 @@ const update = async (req, res) => {
         message: `Post not found`,
       });
     }
-    const {title, body} = req.body;
     const updatedPost = await postNew.update(
       {
         title: title,
